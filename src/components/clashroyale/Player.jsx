@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react'
 
 const Player = (props) => {
-    const [message, setMessage] = useState('Hi there, how are you?');
+    const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    console.log('trigger use effect hook');
-
-    setMessage("I'm fine, thanks for asking.");
-  })
-
-  return <h1>{message}</h1>
+  useEffect(() => {    document.title = `Vous avez cliqué ${count} fois`;  });
+  return (
+    <div>
+      <p>Vous avez cliqué {count} fois</p>
+      <button onClick={() => setCount(count + 1)}>
+        Cliquez ici
+      </button>
+    </div>
+  );
 }
 
 export default Player
