@@ -1,17 +1,19 @@
 ---
 const { tag } = Astro.props
-const apiKey = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImIxMTY1YmQxLTE4MjQtNDU4Yi05ZGY1LTQzYzllMGYzYWY4NyIsImlhdCI6MTY1NzM2NDY5Nywic3ViIjoiZGV2ZWxvcGVyLzU0YmVhOGU3LTE3ZjgtNjE0NC0xMTg1LTU5NGQxMmZmNzdjNiIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI1Mi4yMDQuMTIxLjk5Il0sInR5cGUiOiJjbGllbnQifV19.8r8bdkT7KbSbwj-jPX7NoFgyLrMMM9ZcoYHeGZgY9hEmays1lqZy5qxRlwfeuVuR_YRHBXRdvThpXv0yB7Wrhg'
+const url = 'https://api.baserow.io/api/database/rows/table/77990/?user_field_names=true&order_by=Name'
+const apiToken = '7rATEYBHGRhjrpSBs9wCtwN9AyulnVUb'
+
 const data = await fetch(
-    'https://api.clashroyale.com/v1/players/' + encodeURI(tag),
+    url,
     {
-        headers: new Headers({
-            'Authorization': 'Authorization: Bearer ' + apiKey
-        }), 
+        headers: {
+            'Authorization': 'Token ' + apiToken
+        }
     }
 ).then(r => r.json())
 ---
 <ul>
-    {data.map((item) => (
-      <li>{item}</li>
+    {data.results.map((item: { Name: unknown; }) => (
+      <li class="font-bold text-red-600 p-6">{item.Name}</li>
     ))}
 </ul>
